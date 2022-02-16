@@ -52,8 +52,12 @@ public class Administrador {
 	//Métodos
 	
 	
-	public void ModificarIngrePlato(String plato, Ingredientes[] nuevosIngre){}
+	public void ModificarIngrePlato(String plato, Ingredientes[] nuevosIngre){
+		//estoy cambiando cosas
+	}
 
-	public void NuevoPedido(String[] nombresPlatos, String nombreUsu, String direccionUsu, String telefonoUsu){}
+	public void NuevoPedido(String[] nombresPlatos, String nombreUsu, String direccionUsu, String telefonoUsu){
+		inti=0; //borrar
+	}
 	
 }
