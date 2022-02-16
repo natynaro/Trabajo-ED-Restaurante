@@ -1,5 +1,8 @@
 package Restaurante;
 
+import java.math.BigInteger;
+import java.util.Random;
+
 public class Administrador {
 
 	private Pedidos[] pedidosTotal;
@@ -52,19 +55,88 @@ public class Administrador {
 	//Métodos
 	
 	
+	//De acuerdo al nombre del plato, se busca este en el array de todos los platos para asignarle el nuevo precio
+	public void ModificarPrecioPlato(String plato, double precio){
+		 int i=0;
+		 while(i<platosTotal.lenght && !platosTotal[i].getNombre.equals(plato))i++;
+		 if(i<platosTotal.lenght){
+			 if(precio>=0) {
+				 platosTotal[i].setPrecio(precio);
+			 }else {
+				 //otro throw?? de que el precio es negativo y no sería posible dar un precio así
+			 }
+			 
+		 }else {//un throw? de que no se encontró un plato con este nombre
+		 }
+	}
+	
+	//De acuerdo al nombre del plato, se busca este en el array de todos los platos para asignarle los nuevos ingredientes
 	public void ModificarIngrePlato(String plato, Ingredientes[] nuevosIngre){
 		//estoy cambiando cosas
+		while(i<platosTotal.lenght && !platosTotal[i].getNombre.equals(plato))i++;
+		 if(i<platosTotal.lenght){platosTotal[i].setIngredientes(nuevosIngre);
+		 }else {//un throw? de que no se encontró un plato con este nombre}
+		 }
 	}
 
+	//me dan los nombres platos, entonces uso elmétodo buscar plato para crear el array deplatos y ya creo el usuario que va a hacerel pedido
 	public void NuevoPedido(String[] nombresPlatos, String nombreUsu, String direccionUsu, String telefonoUsu){
-		inti=0; //borrar
+		
+		Platos[] platosPedir= new Platos[0];
+		double totalPrecio= 0; //calcular el precio
+		
+		for(int i=0; i<nombresPlatos.length; i++) {
+			
+			int posicion= buscarPlato(nombresPlatos[i].getNombre); //debería haber un try catch para que cuando en el buscar plato salga la excepción, se imprimael mensaje
+			platosPedir[]=Arrays.copyOf(platosPedir,platosPedir.length+1);
+			platosPedir[platosPedir.length-1]=platosTotal[posicion];
+			totalPrecio=totalPrecio+platosPedir[platosPedir.length-1].getPrecio();
+		}
+		
+		Usuario usuario= new Usuario(nombreUsu, direccionUsu, telefonoUsu);
+		
+		//Acá iría el método buscarDomiDisponible para poder ya crear el pedido
+		
+		Domiciliario domiciliario= new Domiciliario("", 0, true); //borrar esto y asignarleel domiciliario disponible
+		
+		//setear la disponibilidad del domiciliario a false
+		domiciliario.setDisponibilidad(false);
+		
+		//generar un nuevo codigo
+		Random random = new Random();
+		String codigo=new BigInteger(50, random).toString(32);
+		boolean condicion=true;
+		int k=0;
+		
+		if(pedidosTotal.length!=0) {
+			while(condicion) {
+				while(k<pedidosTotal.length && !codigo.equals(pedidosTotal[k].getCodigo())) {
+					k++;
+				}if(k<pedidosTotal.length) {
+					codigo=new BigInteger(50, random).toString(32);
+					k=0;
+				}else {
+					condicion=false;
+				}
+			}
+		}
+		
+		
+		Pedidos pedido= new Pedidos(platosPedir, codigo, totalPrecio, usuario, domiciliario);
+		
+		
+		
 	}
+	
+	//REVISAR,que entonces elnombre se haga con to.Lowercase para que dé la búsqueda del plato
+	//
 	public void addPlato(String nombre,Ingredientes[] ingredientesTotal, double precio) {
 		if(buscarPlato(nombre) == -1) {
 			platosTotal= Arrays.copyOf(platosTotal,platosTotal.length+1);
 			platosTotal[platosTotal.length-1]= new Platos(nombre,ingredientesTotal,precio);
 		}
 	}
+	
 	public void borrarPlato(String nombre) {
 		if(buscarPlato(nombre) != -1) {
 			int i=buscarPlato(nombre);
@@ -76,13 +148,20 @@ public class Administrador {
 			platosTotal= Arrays.copyOf(platosTotal, platosTotal.length-1);
 			}
 	}
+	
+	//REVISAR EL THROW Y CAMBIARLO DE DEVOLVER-1
+	//Deacuerdo al nombre del plato, se devuelve la posicion del Plato en caso de existir
 	public int buscarPlato(String Nombre) {
 		String n= Nombre.toLowerCase();
 		int i=0;
 		while(i<platosTotal.length && !(platosTotal[i].getNombre().equals(n))) {
 			i++;
 		}
-		return(i<platosTotal.length)?i:-1;
+		if(i<platosTotal.length) {
+			return i;
+		}else {
+			return -1; //debería ser un throw, sólo que aún no s
+		}
 	}
 	
 }
