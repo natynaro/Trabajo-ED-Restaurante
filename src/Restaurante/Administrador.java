@@ -207,12 +207,12 @@ public class Administrador {
 		}
 		return v;
 	}
-	
+	//Hola soy Isis y Estas Viendo Disney Channel
 	public String reporteDiario() {
 		String a="";
 		if(pedidosTotal!=null) {
 			for(int i=0;i<pedidosTotal.length;i++) {
-				a+="El pedido "+ (i+1) + "se facturó por un total de: "+pedidosTotal[i].getTotalPrecio() + "\n";
+				a+="El pedido "+ (i+1) + "se facturï¿½ por un total de: "+pedidosTotal[i].getTotalPrecio() + "\n";
 			}
 		}
 		return a;
