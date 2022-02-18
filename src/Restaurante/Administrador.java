@@ -195,13 +195,13 @@ public class Administrador {
 		return domiciliarios[i];
 	}
 	
-	public String ventasDelDia() {
+	public double ventasDelDia() {
 		double v=0;
 		for(int i=0;i<pedidosTotal.length;i++) {
 			v+=pedidosTotal[0].getTotalPrecio();
 		}
-		String total = String.valueOf(v);
-		return total;
+		
+		return v;
 	}
 
 }
