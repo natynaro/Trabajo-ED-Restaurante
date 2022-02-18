@@ -19,7 +19,6 @@ public class Administrador {
 		this.domiciliarios = domiciliarios;
 	}
 
-	
 	public Pedidos[] getPedidosTotal() {
 		return pedidosTotal;
 	}
@@ -103,7 +102,7 @@ public class Administrador {
 		//setear la disponibilidad del domiciliario a false
 		domiciliario.setDisponibilidad(false);
 		
-		//generar un nuevo codigo
+		//generar un nuevo codigo BORRAR
 		Random random = new Random();
 		String codigo=new BigInteger(50, random).toString(32);
 		boolean condicion=true;
