@@ -181,27 +181,41 @@ public class Administrador {
 	
 	public void quitarDomiciliario(String nombre) {
 		int d = buscarDomiciliario(nombre);
+		if(domiciliarios!=null && domiciliarios.length>0) {
 		for(int i = d; i<domiciliarios.length;i++) {
 			domiciliarios[i]=domiciliarios[i+1];
 			}	
 		domiciliarios= Arrays.copyOf(domiciliarios, domiciliarios.length-1);
+		}
 	}
 	
 	public Domiciliario buscarDomDisponible() {
 		int i=0;
+		
 		while(i<domiciliarios.length && domiciliarios[i].isDisponibilidad()!=true) {
 			i++;
 		}
-		return domiciliarios[i];
+		return (i<domiciliarios.length)?domiciliarios[i]:null;
 	}
 	
 	public double ventasDelDia() {
 		double v=0;
+		if(pedidosTotal!=null) {
 		for(int i=0;i<pedidosTotal.length;i++) {
-			v+=pedidosTotal[0].getTotalPrecio();
+			v+=pedidosTotal[i].getTotalPrecio();
+			}
 		}
-		
 		return v;
+	}
+	
+	public String reporteDiario() {
+		String a="";
+		if(pedidosTotal!=null) {
+			for(int i=0;i<pedidosTotal.length;i++) {
+				a+="El pedido "+ (i+1) + "se facturó por un total de: "+pedidosTotal[i].getTotalPrecio() + "\n";
+			}
+		}
+		return a;
 	}
 
 }
