@@ -74,7 +74,8 @@ public class Administrador {
 	public void ModificarIngrePlato(String plato, Ingredientes[] nuevosIngre){
 		//estoy cambiando cosas
 		while(i<platosTotal.lenght && !platosTotal[i].getNombre.equals(plato))i++;
-		 if(i<platosTotal.lenght){platosTotal[i].setIngredientes(nuevosIngre);
+		 if(i<platosTotal.lenght && nuevosIngre.length!=0){
+			 platosTotal[i].setIngredientes(nuevosIngre);
 		 }else {//un throw? de que no se encontró un plato con este nombre}
 		 }
 	}
@@ -97,7 +98,7 @@ public class Administrador {
 		
 		//Acá iría el método buscarDomiDisponible para poder ya crear el pedido
 		
-		Domiciliario domiciliario= new Domiciliario("", 0, true); //borrar esto y asignarleel domiciliario disponible
+		Domiciliario domiciliario= buscarDomiciliario(); //borrar esto y asignarleel domiciliario disponible
 		
 		//setear la disponibilidad del domiciliario a false
 		domiciliario.setDisponibilidad(false);
