@@ -164,4 +164,44 @@ public class Administrador {
 		}
 	}
 	
+	//Lo de luis
+	
+	public int buscarDomiciliario(String nombre) {
+		String n= nombre.toLowerCase();
+		int i =0;
+		while(i<domiciliarios.length && !n.equals(domiciliarios[i].getNombre())) {
+			i++;
+		}
+		if(i<domiciliarios.length) {
+			return i;
+		}else {
+			return -1;
+		}
+	}
+	
+	public void quitarDomiciliario(String nombre) {
+		int d = buscarDomiciliario(nombre);
+		for(int i = d; i<domiciliarios.length;i++) {
+			domiciliarios[i]=domiciliarios[i+1];
+			}	
+		domiciliarios= Arrays.copyOf(domiciliarios, domiciliarios.length-1);
+	}
+	
+	public Domiciliario buscarDomDisponible() {
+		int i=0;
+		while(i<domiciliarios.length && domiciliarios[i].isDisponibilidad()!=true) {
+			i++;
+		}
+		return domiciliarios[i];
+	}
+	
+	public String ventasDelDia() {
+		double v=0;
+		for(int i=0;i<pedidosTotal.length;i++) {
+			v+=pedidosTotal[0].getTotalPrecio();
+		}
+		String total = String.valueOf(v);
+		return total;
+	}
+
 }
