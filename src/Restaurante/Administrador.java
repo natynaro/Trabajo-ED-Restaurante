@@ -218,4 +218,43 @@ public class Administrador {
 		return a;
 	}
 
+	public void AddIngrediente(String nombre, int cantidad) {
+		if(ingredientesTotal == null) {
+			ingredientesTotal = new Ingredientes[1];
+			ingredientesTotal[0] = new Ingredientes(nombre,cantidad);
+		}else {
+			ingredientesTotal = Arrays.copyOf(ingredientesTotal, ingredientesTotal.length + 1);
+			ingredientesTotal[ingredientesTotal.length - 1] = new Ingredientes(nombre,cantidad);
+		}
+	}
+	
+	public void EliminarIngrediente(String nombre) throws EListaIngredientesVacia, EIngredienteNoExiste {
+		boolean seEncontroElIngrediente = false;
+		if(ingredientesTotal != null && ingredientesTotal.length > 0) {
+			for(int i = 0; i<ingredientesTotal.length; i++) {
+				if(nombre.compareTo(ingredientesTotal[i].getNombre()) == 0) {
+					seEncontroElIngrediente = true;
+					for(int u = i; u<ingredientesTotal.length - 1; u++) {
+						ingredientesTotal[u] = ingredientesTotal[u+1];
+					}
+					ingredientesTotal = Arrays.copyOf(ingredientesTotal, ingredientesTotal.length + 1);
+					}
+				}
+				if(seEncontroElIngrediente == false) {
+					throw new EIngredienteNoExiste();
+				}
+			}else {
+				throw new EListaIngredientesVacia();
+		}
+	}
+	
+	public void addDomiciliario(String nombre) {
+		if(domiciliarios == null) {
+			domiciliarios = new Domiciliario[1];
+			domiciliarios[0] = new Domiciliario(nombre);
+		}else {
+			domiciliarios = Arrays.copyOf(domiciliarios, domiciliarios.length + 1);
+			domiciliarios[domiciliarios.length - 1] = new Domiciliario(nombre);
+		}
+	}
 }
