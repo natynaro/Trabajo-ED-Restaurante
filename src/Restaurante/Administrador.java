@@ -207,7 +207,6 @@ public class Administrador {
 		}
 		return v;
 	}
-	//Hola soy Isis y Estas Viendo Disney Channel
 	public String reporteDiario() {
 		String a="";
 		if(pedidosTotal!=null) {
